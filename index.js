@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const serverLess = require('serverless-http');
 const PORT = process.env.PORT || 3000;
 
 // Dummy data produk clothing
@@ -43,3 +44,7 @@ app.get('/produk', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server berjalan di port ${PORT}`);
 });
+
+module.exports = {
+  handler: serverLess(app)
+};
