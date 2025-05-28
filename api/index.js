@@ -42,11 +42,4 @@ app.get('/produk', (req, res) => {
 });
 
 // Export the handler for Vercel serverless function
-module.exports.handler = async (event, context) => {
-  try {
-    return await handler(event, context);
-  } catch (error) {
-    console.error('Serverless function error:', error);
-    throw error;
-  }
-};
+module.exports = serverless(app);
