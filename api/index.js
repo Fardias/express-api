@@ -1,7 +1,7 @@
 const express = require('express');
+const serverless = require('serverless-http');
+
 const app = express();
-const serverLess = require('serverless-http');
-const PORT = process.env.PORT || 3000;
 
 // Dummy data produk clothing
 const produk = [
@@ -31,20 +31,15 @@ const produk = [
   }
 ];
 
-// Root
+// Root endpoint
 app.get('/', (req, res) => {
   res.send('Halo, ini API produk clothing sederhana!');
 });
 
-// Endpoint produk
+// Produk endpoint
 app.get('/produk', (req, res) => {
   res.json(produk);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server berjalan di port ${PORT}`);
-});
-
-module.exports = {
-  handler: serverLess(app)
-};
+// Export the handler for Vercel serverless function
+module.exports.handler = serverless(app);
